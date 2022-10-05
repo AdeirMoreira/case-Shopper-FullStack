@@ -1,0 +1,10 @@
+### registerOrder
+POST http://localhost:3003/order/register
+Content-Type: application/json
+
+{
+    "clientId": 10,
+    "clientName": "adeir",
+    "totalPrice": 10,
+    "productsList": "batata"
+}

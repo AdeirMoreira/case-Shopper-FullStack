@@ -7,6 +7,7 @@
     "dev": "clear && ts-node-dev ./src/index.ts",
     "start": "node ./build/src/index.js",
     "test": "jest",
+    "populate": "npx ts-node-dev ./src/stock/script/populateStockTableScript.ts",
     "migration:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/data-source/data-source.ts",
     "migration:revert": "npx typeorm-ts-node-commonjs migration:revert -d ./src/data-source/data-source.ts",
     "migration:create": "npx typeorm-ts-node-commonjs migration:create"
@@ -29,9 +30,12 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "class-validator": "^0.13.2",
     "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "fast-csv": "^4.3.6",
     "jest": "^28.1.3",
     "jsonwebtoken": "^8.5.1",
     "knex": "^2.1.0",
