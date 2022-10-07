@@ -3,8 +3,12 @@ POST http://localhost:3003/order/register
 Content-Type: application/json
 
 {
-    "clientId": 10,
     "clientName": "adeir",
     "totalPrice": 10,
-    "productsList": "batata"
+    "productsList": [{"id":"fcb35c21-ab15-49c3-847e-fe987409591b","qty_purchased": 100},{"id":"ff6ba274-5d9c-4abe-a13a-22a759851b16","qty_purchased": 150}],
+    "deliveryDate": "2022-12-31"
 }
+
+### GetAllStock
+GET http://localhost:3003/stock/all
+###

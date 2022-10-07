@@ -1,6 +1,6 @@
 import { Router } from "express";
-import OrderController from "../order/controller/orderController";
+import orderController from "../order/controller/orderController";
 
 export const OrderRouter = Router()
 
-OrderRouter.post('/register', OrderController.RegisterOrder)
+OrderRouter.post('/register', orderController.RegisterOrder)

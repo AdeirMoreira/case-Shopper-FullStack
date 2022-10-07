@@ -3,20 +3,17 @@ import { Column, Entity, PrimaryColumn } from "typeorm"
 @Entity({ name:'Order' })
 export class Order {
     constructor(
-         id :string, clientId:number, clientName: string, totalPrice: number, productsList: string
+        id :string, clientName: string, totalPrice: number, productsList: string, deliveryDate: Date
     ){
         this.id = id
-        this.clientId = clientId,
         this.clientName = clientName,
         this.totalPrice = totalPrice,
         this.productsList = productsList
+        this.deliveryDate = deliveryDate
     }
     
     @PrimaryColumn()
     id: string
-
-    @Column()
-    clientId: number
 
     @Column('varchar')
     clientName: string
@@ -26,4 +23,7 @@ export class Order {
 
     @Column('text')
     productsList: string
+
+    @Column('date')
+    deliveryDate: Date
 }

@@ -14,10 +14,6 @@ export class createOrderTable1664990341114 implements MigrationInterface {
                         isUnique: true
                     },
                     {
-                        name: 'clientId',
-                        type: 'int',
-                    },
-                    {
                         name: 'clientName',
                         type: 'varchar',
                     },
@@ -28,6 +24,10 @@ export class createOrderTable1664990341114 implements MigrationInterface {
                     {
                         name: 'productsList',
                         type: 'text',
+                    },
+                    {
+                        name: 'deliveryDate',
+                        type: 'date'
                     }
                 ]
             })

@@ -4,17 +4,7 @@ import { AppDataSource } from '../../data-source/data-source';
 import { Stock } from '../entity/Stock';
 import IDGenerator from '../../Services/IDGenerator';
 
-// csv.parseFile('products.csv')
-//     .on('error', error => console.error(error))
-//     .on('data', row => console.log(row))
-//     .on('end', (rowCount: number) => console.log(`Parsed ${rowCount} rows`));
-
-
-
-
-
-
- const read = () => {
+const read = () => {
     const products = []
     fs.createReadStream('./src/stock/script/products.csv')
     .pipe(csv.parse({ headers:true }))

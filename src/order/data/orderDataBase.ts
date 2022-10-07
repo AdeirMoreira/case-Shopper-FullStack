@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm"
 import { AppDataSource } from "../../data-source/data-source"
+import { CustonError } from "../../Model/CustomError/CustomError"
 import { Order } from "../entity/Order"
 
 export class OrderDataBase {
@@ -7,16 +8,13 @@ export class OrderDataBase {
         private appDataSource: DataSource
     ){}
 
-     public async register(order:Order){
+    public async register(order:Order){
         try {
-            await this.appDataSource.initialize()
             const repository = this.appDataSource.getRepository(Order)
             const response = await repository.save(order)
             return response
         } catch (error) {
-            throw new Error(error)
-        } finally {
-            this.appDataSource.destroy()
+            throw new CustonError(error.statusCode || 500, error.sqlMessage || error.message)
         }
     }
 }
