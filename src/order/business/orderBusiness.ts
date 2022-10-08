@@ -3,8 +3,7 @@ import { CustonError } from "../../Model/CustomError/CustomError";
 import { Product } from "../../Model/types";
 import idGenerator, { IdGenerator } from "../../Services/IDGenerator";
 import stockBusiness, { StockBusiness } from "../../stock/business/stockBusiness";
-import { UpdateProductDto } from "../../stock/dto/updateProductDto";
-import { Stock } from "../../stock/entity/Stock";
+import { ProductsPurchased } from "../../stock/dto/ProductsPurchased";
 import orderData, { OrderDataBase } from "../data/orderDataBase";
 import { RegisterOrderDto } from "../dto/registerOrderDto";
 import { Order } from "../entity/Order";
@@ -19,22 +18,17 @@ export class OrderBusiness {
     public async RegisterOrder(registerOrderDto:RegisterOrderDto){
         try {
             await validateOrReject(registerOrderDto)
-            this.CheckProductsConformity(registerOrderDto.productsList as any)
-            const products = await this.checkProductsInDataBase(registerOrderDto.productsList)
-
-            await this.UpdateStock(products,registerOrderDto.productsList as any)
-
+            this.CheckProductsConformity(registerOrderDto.productsPurchased as any)
+            await this.checkProductsInDataBase(registerOrderDto.productsPurchased)
             const orderId = this.idGenerator.generateId()
             const newOrder = new Order(
                 orderId,
                 registerOrderDto.clientName,
                 registerOrderDto.totalPrice,
-                JSON.stringify(registerOrderDto.productsList),
+                JSON.stringify(registerOrderDto.productsPurchased),
                 new Date(registerOrderDto.deliveryDate)
                 )
-            const respone = await this.orderData.register(newOrder)
-            return respone
-            return null
+            return this.orderData.register(newOrder)
         } catch (error) {
             if(Array.isArray(error)){
                 this.FormatValidationErrorMessages(error)
@@ -42,23 +36,6 @@ export class OrderBusiness {
                 throw new CustonError(error.statusCode,error.message)
             }            
         }
-    }
-
-    private async UpdateStock(stock:Stock[],productsPurchaseList:Product[]){
-        const productsUpdatedArray = []
-        for (let index in stock) {
-            const newProductQty = stock[index].qty_stock - productsPurchaseList[index].qty_purchased
-            const productUpdated = new UpdateProductDto(
-                productsPurchaseList[index].id, 
-                undefined, undefined,
-                newProductQty
-            )
-            productsUpdatedArray.push(productUpdated)
-        }
-        const promisesArray = productsUpdatedArray.map(product => {
-            return this.stockBusiness.update(product)
-        })
-        return Promise.all(promisesArray)
     }
 
     private FormatValidationErrorMessages(error:any){
@@ -72,11 +49,11 @@ export class OrderBusiness {
         throw new CustonError(422,erroMessagesString)
     }
 
-    private CheckProductsConformity (productsList:Product[]) {
-        const isArray = Array.isArray(productsList)
+    private CheckProductsConformity (productsPurchased:ProductsPurchased[]) {
+        const isArray = Array.isArray(productsPurchased) && productsPurchased.length !== 0
         let isNotProducts = false
         if(isArray){
-            isNotProducts = productsList.some(product => 
+            isNotProducts = productsPurchased.some(product => 
                 (typeof product !== 'object' || product === undefined) ||
                 (!product.id || typeof product.id  !==  'string' || 
                 typeof product.qty_purchased !== 'number' || product.qty_purchased < 1)

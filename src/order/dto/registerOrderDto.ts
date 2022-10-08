@@ -2,10 +2,10 @@ import { IsDateString, IsNotEmpty, IsNumber, IsObject, IsString, Min } from "cla
 
 
 export class RegisterOrderDto{
-    constructor(clientName:string, totalPrice: number, productsList: object[], deliveryDate: string){
+    constructor(clientName:string, totalPrice: number, productsPruchased: object[], deliveryDate: string){
         this.clientName = clientName
         this.totalPrice = totalPrice
-        this.productsList = productsList 
+        this.productsPurchased = productsPruchased
         this.deliveryDate = deliveryDate
     }
 
@@ -19,7 +19,7 @@ export class RegisterOrderDto{
 
     @IsNotEmpty({message:'productsList é requerido!'})
     @IsObject({each:true ,message:'productsList deve ser um array de produtos'})
-    productsList: object[]
+    productsPurchased: object[]
 
     @IsDateString({},{ message:'deliveryDate deve ser uma data válida' })
     deliveryDate: string
