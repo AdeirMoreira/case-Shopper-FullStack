@@ -20,7 +20,7 @@ export class StockBusiness {
     try {
       const product = await this.stockDataBase.getById(id);
       if (!product) {
-        throw new CustonError(404, "Produto não encontrado!");
+        throw new CustonError(404, "Produto não encontrado");
       }
       return product;
     } catch (error) {
@@ -103,7 +103,7 @@ export class StockBusiness {
       const message = Object.values(error.constraints);
       errorMessages.push(...message);
     });
-    const erroMessagesString = errorMessages.join(", ");
+    const erroMessagesString = errorMessages.join(" e ");
     throw new CustonError(422, erroMessagesString);
   }
 }

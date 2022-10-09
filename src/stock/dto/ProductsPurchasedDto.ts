@@ -18,7 +18,7 @@ export class ProductsPurchasedDto {
     // @Min(1,{ message:'O Número de unidades compradas dever ser maior que 0'})
     // qty_purchase: number;
 
-    @IsNotEmpty({message:'productsPurchased é requerido!'})
+    @IsNotEmpty({message:'productsPurchased é requerido'})
     @IsObject({each:true ,message:'productsPurchased deve ser um array de objetos'})
     productsPurchased: object[]
 }

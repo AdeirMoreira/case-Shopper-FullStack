@@ -9,16 +9,16 @@ export class RegisterOrderDto{
         this.deliveryDate = deliveryDate
     }
 
-    @IsNotEmpty({message:"clientName é requerido!"})
-    @IsString({message:"clientName deve ser uma string!"})
+    @IsNotEmpty({ message:"clientName é requerido" })
+    @IsString({ message:"clientName deve ser uma string" })
     clientName:string
 
-    @IsNumber({},{message:'total Price deve ser um numero!'})
-    @Min(0.01,{message:"total Price deve ser um numero positivo!"})
+    @IsNumber({},{ message:'totalPrice deve ser um numero' })
+    @Min(0.01,{ message:"totalPrice deve ser um numero positivo" })
     totalPrice:number
 
-    @IsNotEmpty({message:'productsList é requerido!'})
-    @IsObject({each:true ,message:'productsList deve ser um array de produtos'})
+    @IsNotEmpty({ message:'productsPurchased é requerido' })
+    @IsObject({each:true ,message:'productsPurchased deve ser um array de produtos' })
     productsPurchased: object[]
 
     @IsDateString({},{ message:'deliveryDate deve ser uma data válida' })

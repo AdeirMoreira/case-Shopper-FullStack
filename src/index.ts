@@ -7,3 +7,5 @@ app.use('/order', OrderRouter)
 
 app.use('/stock', StockRouter)
 
+export default app
+

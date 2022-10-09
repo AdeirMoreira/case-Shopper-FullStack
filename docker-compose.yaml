@@ -26,3 +26,18 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASS}
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASS}
+  
+  dbtest:
+    image: mysql
+    container_name: mysqkl-dbTest
+    restart: always
+    tty: true
+    ports:
+      - 3307:3306
+    # volumes:
+    #   - .docker/dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=shopperTest
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}

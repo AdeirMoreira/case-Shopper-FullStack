@@ -45,7 +45,7 @@ export class OrderBusiness {
             errorMessages.push(...message)
                 
         })
-        const erroMessagesString = errorMessages.join(', ')
+        const erroMessagesString = errorMessages.join(' e ')
         throw new CustonError(422,erroMessagesString)
     }
 
@@ -69,10 +69,6 @@ export class OrderBusiness {
             return this.stockBusiness.getById(product.id)
         })
         const products = await Promise.all(productsInDatabase)
-        const anyProductMissig = products.some(product => !product)
-        if(anyProductMissig){
-            throw new CustonError(422,'Um dos produtos não foi encontrado!')
-        }
         return products
     }
 }

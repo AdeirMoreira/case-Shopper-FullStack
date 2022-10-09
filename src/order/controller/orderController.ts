@@ -11,8 +11,8 @@ export class OrderController {
     ){}
 
     public  RegisterOrder = async (req:Request,res:Response) => {
-        const {clientName, totalPrice, productsList, deliveryDate} = req.body
-        const registerOrderDto = new RegisterOrderDto(clientName, totalPrice, productsList, deliveryDate)
+        const {clientName, totalPrice, productsPurchased, deliveryDate} = req.body
+        const registerOrderDto = new RegisterOrderDto(clientName, totalPrice, productsPurchased, deliveryDate)
         try {
             await this.appDataSource.initialize()
             const response = await this.orderBusiness.RegisterOrder(registerOrderDto)
