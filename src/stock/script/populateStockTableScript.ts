@@ -4,7 +4,7 @@ import { AppDataSource } from '../../data-source/data-source';
 import { Stock } from '../entity/Stock';
 import IDGenerator from '../../Services/IDGenerator';
 
-const read = () => {
+export const PopulateDatabase = () => {
     const products = []
     fs.createReadStream('./src/stock/script/products.csv')
     .pipe(csv.parse({ headers:true }))
@@ -34,9 +34,4 @@ const read = () => {
     }) 
 }
 
-read()
-
-
-
-
-
+PopulateDatabase()

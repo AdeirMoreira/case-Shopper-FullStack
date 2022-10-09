@@ -20,7 +20,7 @@ export class StockBusiness {
     try {
       const product = await this.stockDataBase.getById(id);
       if (!product) {
-        throw new CustonError(404, "Produto não encontrado");
+        throw new CustonError(404, `Produto de ${id} não foi encontrado no banco de dados`);
       }
       return product;
     } catch (error) {
