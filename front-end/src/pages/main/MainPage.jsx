@@ -1,8 +1,12 @@
 import { useContext, useEffect } from "react";
-import ProductCard from "../../components/productCard/productCard";
+import ProductCard from "../../components/productCard/ProductCard";
 import { Shopper } from "../../globalState/Context";
 import { GetAllProducts } from "../../service/cartPage";
 import * as s from "./style";
+import magnifyingGlassIcon from "../../assets/images/magnifying-glass.png"
+import shopperLogo from "../../assets/images/shopper-logo.png"
+import Cart from "../../components/cart/Cart";
+import ShoppingBag from "../../components/shoppingBag/ShoppingBag";
 
 const MainPage = () => {
   const { setProducts, products } = useContext(Shopper);
@@ -14,8 +18,23 @@ const MainPage = () => {
   return (
     <s.ScreenContainer>
       <s.HeaderContainer>
-        <s.SectionTitle></s.SectionTitle>
+        <s.TitleContainer>
+          <s.TitleRow>
+            <s.ShopperLogoImg src={shopperLogo}/>
+            <s.Title>shopper</s.Title>
+          </s.TitleRow>
+          <s.Subtitle>compra programada</s.Subtitle>
+        </s.TitleContainer>
+          <s.SearchContainer>
+            <s.InputSearchProduct name="productSearch" placeholder="O que você procura?" type={'text'} />
+            <s.InputSearchButton>
+              <s.MagnifyingGlassIcon src={magnifyingGlassIcon}></s.MagnifyingGlassIcon>
+                Buscar
+            </s.InputSearchButton>
+          </s.SearchContainer>
       </s.HeaderContainer>
+      <Cart/>
+      <ShoppingBag/>
       <s.MainContainer>
         {/* <s.SectionProducts> */}
         {products.length > 0 && <ProductCard products={products}/>}
