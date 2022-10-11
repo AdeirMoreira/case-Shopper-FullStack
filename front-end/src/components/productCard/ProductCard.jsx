@@ -1,5 +1,7 @@
-import * as s from "./style";
+import * as s from "./Style";
 import shopperLogo from "../../assets/images/logo-shopper-01.png";
+import addIcon from '../../assets/images/plus.png'
+import removeIcon from '../../assets/images/negative.png'
 
 const ProductCard = (props) => {
   const { products } = props;
@@ -22,8 +24,15 @@ const ProductCard = (props) => {
             </s.ProductInfoContainer>
             <s.ButtonContainer>
                 <s.AddButton>+ Adicionar</s.AddButton>
+                <s.ChangeQuantityContainer>
+                  <s.RemoveIncon src={removeIcon}/>
+                  <s.Quantity>
+                    <s.QuantityNumber>55</s.QuantityNumber>
+                  </s.Quantity>
+                  <s.AddIncon src={addIcon}/>
+                </s.ChangeQuantityContainer>
             </s.ButtonContainer>
-            </s.CardContainer>
+          </s.CardContainer>
         );
       })}
     </>
