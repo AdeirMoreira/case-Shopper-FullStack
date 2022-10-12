@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "clientName": "adeir",
     "totalPrice": 10,
-    "productsPurchased": [{"id":"03e199f6-279d-49fc-9b3c-643a1be2021d","qty_purchased": 100}],
+    "productsPurchased": [{"id":"01684dbb-81aa-4943-948f-bb502d6b9710","qty_purchased": 501}],
     "deliveryDate": "2022-12-31"
 }
 
@@ -17,6 +17,7 @@ PATCH http://localhost:3003/stock/update
 Content-Type: application/json
 
 {
-    "productsPurchased": [{"id":"03e199f6-279d-49fc-9b3c-643a1be2021d","qty_purchased": 100},{"id":"0a204a5a-c673-426b-83a7-b0fa615975ab","qty_purchased": 150}]
+    "productsPurchased": [{"id":"01684dbb-81aa-4943-948f-bb502d6b9710","qty_purchased": 1000},{"id":"0c915b3a-cd81-4f26-98e6-17c9a1193e65","qty_purchased": 150}]
 }
+
 ###

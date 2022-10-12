@@ -64,12 +64,20 @@ export class OrderBusiness {
         }
     }
 
-    private async checkProductsInDataBase (productsList:any[]) {
-        const productsInDatabase =  productsList.map((product:any) => {
+    private async checkProductsInDataBase (productsPurchased:any[]) {
+        const productsInDatabase =  productsPurchased.map((product:any) => {
             return this.stockBusiness.getById(product.id)
         })
-        const products = await Promise.all(productsInDatabase)
-        return products
+        const productsDB = await Promise.all(productsInDatabase)
+        productsPurchased.forEach((product,index) => {
+            const indexDB = productsDB.findIndex(p => p.id === product.id)
+            if(productsDB[indexDB].qty_stock - productsPurchased[index].qty_purchased < 0){
+                throw new CustonError(422,
+                    `A quantidade comprada do produto de id ${productsPurchased[index].id}` +
+                    ' é maior que do que a quantidade em estoque.')
+            }
+        })
+        return productsDB
     }
 }
 

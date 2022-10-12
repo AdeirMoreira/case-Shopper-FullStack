@@ -1,14 +1,14 @@
 import { Column, Entity, PrimaryColumn } from "typeorm"
 
-@Entity({ name:'Order' })
+@Entity({ name:'PurchaseOrder' })
 export class Order {
     constructor(
-        id :string, clientName: string, totalPrice: number, productsList: string, deliveryDate: Date
+        id :string, clientName: string, totalPrice: number, productsPurchased: string, deliveryDate: Date
     ){
         this.id = id
         this.clientName = clientName,
         this.totalPrice = totalPrice,
-        this.productsList = productsList
+        this.productsPurchased = productsPurchased
         this.deliveryDate = deliveryDate
     }
     
@@ -22,7 +22,7 @@ export class Order {
     totalPrice: number
 
     @Column('text')
-    productsList: string
+    productsPurchased: string
 
     @Column('date')
     deliveryDate: Date

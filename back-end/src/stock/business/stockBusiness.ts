@@ -45,6 +45,11 @@ export class StockBusiness {
         const newProductQty =
           productsPurchasedDB[index].qty_stock -
           productsDto[index].qty_purchased;
+        if(newProductQty < 0) {
+          throw new CustonError(422,
+            `A quantidade comprada do produto de id ${productsPurchasedDB[index].id}` +
+            ' é maior que do que a quantidade em estoque.')
+        }
         const productUpdated = new Stock(
           productsPurchasedDB[index].id,
           productsPurchasedDB[index].name,
