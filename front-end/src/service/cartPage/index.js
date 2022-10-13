@@ -1,4 +1,4 @@
-import { BaseURL } from "../../Constants/constants"
+import { BaseURL } from "../../constants/constants"
 import axios from 'axios'
 
 export const GetAllProducts = (setProducts) => {

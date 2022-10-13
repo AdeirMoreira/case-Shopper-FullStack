@@ -1,8 +1,11 @@
 import Header from "../../components/header/Header"
 import * as s from './Style'
 import shopperTruck from '../../assets/images/shopperTruck.png'
+import { useNavigate } from "react-router-dom"
+import { goToMainPage } from "../../routes/Coordinators"
 
 const ShippingPage = () => {
+    const navigate = useNavigate()
     return(
         <>
             <Header/>
@@ -11,7 +14,7 @@ const ShippingPage = () => {
                 <s.OrderDispatched>
                     Seu pedido está sendo processado e em breve chegará em seu endereço.
                 </s.OrderDispatched>
-                <s.ReturnToPurchasesButton>Voltar às compras</s.ReturnToPurchasesButton>
+                <s.ReturnToPurchasesButton onClick={() => goToMainPage(navigate)}>Voltar às compras</s.ReturnToPurchasesButton>
             </s.ShippingCotainer>
         </>
     )

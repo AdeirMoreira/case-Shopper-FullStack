@@ -1,12 +1,110 @@
 import { useState } from "react"
+import { useInput } from "../hooks/useInput"
+import { GetAllProducts } from "../service/cartPage"
 import { Shopper } from "./Context"
 
 export const GlobalState = (props) => {
     const [products, setProducts] = useState([]) 
+    const [cart, setCart] = useState([])
+    const [purchaseData , setPurchaseData] = useState({ totalPurchasePrice:0, totalPurchaseItens:0 })
+    const [displayShoppingBag, setDisplayShoppingBag] = useState(false)
+    const [name, handleName, clearInputName] = useInput('')
+    const [deliveryDate, handleDate, clearInputDate] = useInput('')
+    const [search, handleSearh, clearInputSearch] = useInput('')
+    const [searchTerm, setSearchTerm] = useState('')
     
+    const GetAllProductsInStock = () => {
+        GetAllProducts(addProductPurchaseProperties)
+    }
+
+    const addProductPurchaseProperties = (productArray) => {
+        const products = productArray.map(product => {
+            product.qty_purchased = 0
+            product.totalPrice = 0
+            product.inCart = false
+            return product
+        })
+        setProducts(products)
+    }
+
+    const addToCart = (product) => {
+        const newProduct = {
+            ...product, 
+            qty_purchased: product.qty_purchased + 1,
+            totalPrice: (product.qty_purchased + 1) * product.price,
+            inCart: true
+        }
+        const productInCart = cart.find(prod => prod.id === product.id)
+        let newCart = cart
+        if(productInCart) {
+            newCart = cart.map(prod => product.id === prod.id ? newProduct : prod )
+            setCart(newCart)
+        } 
+        else {
+            newCart.push(newProduct)
+            setCart(newCart)
+        }
+        const newProducts = products.map(prod => prod.id === product.id ? newProduct : prod)
+        setProducts(newProducts)
+        calculePurchaseData(newCart)
+    }
+
+    const removeFromCart = (product) => {
+        const newProduct = {
+            ...product, 
+            qty_purchased: product.qty_purchased - 1,
+            totalPrice: (product.qty_purchased - 1) * product.price,
+            inCart: (product.qty_purchased - 1) === 0 ? false : true
+        }
+        const newCart = cart.map(prod => prod.id === product.id ? newProduct : prod )
+                            .filter(prod => prod.qty_purchased > 0)
+        setCart(newCart)
+        const newProducts = products.map(prod => prod.id === product.id ? newProduct : prod)
+        setProducts(newProducts)
+        calculePurchaseData(newCart)
+    }
+
+    const removeFromCartDirectly = (product) => {
+        const newProduct = {
+            ...product, 
+            qty_purchased: 0,
+            totalPrice: 0,
+            inCart: false
+        }
+        const newProducts = products.map(prod => prod.id === product.id ? newProduct: prod)
+        const newCart = cart.filter(prod => prod.id !== product.id)
+        setProducts(newProducts)
+        setCart(newCart)
+        calculePurchaseData(newCart)
+    }
+
+    const calculePurchaseData = (cart) => {
+        const totalPurchasePrice = cart.reduce((total,product) => total + product.totalPrice ,0)
+        const totalPurchaseItens = cart.reduce((total,product) => total + product.qty_purchased ,0)
+        setPurchaseData({totalPurchasePrice,totalPurchaseItens})
+    }
+    
+    const openCloseShoppingBag = () => setDisplayShoppingBag(displayShoppingBag ? false : true)
+
+    const searchProduct = (term) => setSearchTerm(term)
+    
+    const clearSearchTerm = () => {
+        setSearchTerm('')
+        clearInputSearch()
+    }
     const params = {
         products,
-        setProducts
+        cart,
+        GetAllProductsInStock,
+        addToCart,
+        removeFromCart,
+        removeFromCartDirectly,
+        purchaseData,
+        displayShoppingBag,
+        openCloseShoppingBag,
+        name, handleName, clearInputName,
+        deliveryDate, handleDate, clearInputDate,
+        search, handleSearh, clearInputSearch, searchTerm, searchProduct, clearSearchTerm
     }
 
     return (
