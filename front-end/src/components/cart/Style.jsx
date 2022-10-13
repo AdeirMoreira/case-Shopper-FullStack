@@ -40,22 +40,23 @@ export const ShoppingBagIcon = styled.img`
     width: 1.7em;
     height: 1.7em;
 `
-
 export const TotalPriceContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
-
 export const PriceRow = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     padding-right: 0.5em;
+    justify-content: flex-end;
 `
 export const OpenCartRow = styled.div`
     display: flex;
     flex-direction: row;
     gap: 0.5em;
+    justify-content: flex-end;
+    padding-right: 0.5em;
 `
 export const OpenCloseCart = styled.span`
     color: white;
@@ -66,21 +67,16 @@ export const OpenCloseIcon = styled.img`
     height: 1em;
     align-self: center;
 `
-
 export const RealSign = styled.span`
-    /* margin: 0; */
     color: white;
     padding : 0em 0.1em 0.2em;
     font-size: 0.7em;
 `
-
 export const Price = styled.span`
-    /* margin: 0; */
     color: white;
     font-size: 1.6em;
     font-weight: bold;
 `
-
 export const FinalizePurchaseContainer = styled.div`
     background-color: rgb(45,167,122);
     width: 100%;
@@ -91,7 +87,6 @@ export const FinalizePurchaseContainer = styled.div`
     justify-content: center;
     align-items: center;
 `
-
 export const FinalizePurchaseText = styled.span`
     font-size: 1.1em;
     color: white;
