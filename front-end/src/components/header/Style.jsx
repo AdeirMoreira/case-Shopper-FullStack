@@ -41,8 +41,6 @@ export const Subtitle = styled.h2`
     font-size: 0.8em;
     color: rgb(91,133,197);
 `
-
-
 export const SearchContainer = styled.div`
     border:  0.1em solid rgb(236,236,236);
     border-radius: 4em;
@@ -63,7 +61,21 @@ export const SearchContainer = styled.div`
         width: 50%;
     }
 `
+export const InputContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`
+export const Xbutton = styled.button`
+    height: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+`
+export const XIcon = styled.img`
 
+`
 export const InputSearchProduct = styled.input`
     width: 100%;
     height: 2em;
