@@ -2,12 +2,16 @@ import * as s from "./Style";
 import shopperLogo from "../../assets/images/logo-shopper-01.png";
 import addIcon from '../../assets/images/plus.png'
 import removeIcon from '../../assets/images/negative.png'
+import { useContext } from "react";
+import { Shopper } from "../../globalState/Context";
 
-const ProductCard = (props) => {
-  const { products } = props;
+const ProductCard = () => {
+  const { addToCart, removeFromCart, products, searchTerm } = useContext(Shopper);
+  
   return (
     <>
-      {products.map((product) => {
+      {products.filter(product => product.name.toUpperCase().includes(searchTerm.toUpperCase()))
+                .map((product) => {
         return (
           <s.CardContainer key={product.id}>
             <s.ImgProduct src={shopperLogo}></s.ImgProduct>
@@ -15,7 +19,7 @@ const ProductCard = (props) => {
             <s.ProductInfoContainer>
                 <s.ProducPriceContainer>
                     <s.RealSign>R$</s.RealSign>
-                    <s.ProductPrice>{product.price}</s.ProductPrice>
+                    <s.ProductPrice>{product.price.toFixed(2).replace('.', ',')}</s.ProductPrice>
                 </s.ProducPriceContainer>
                 <s.ProductStockContainer>
                     <s.ProductStock>Estoque</s.ProductStock>
@@ -23,14 +27,17 @@ const ProductCard = (props) => {
                 </s.ProductStockContainer>
             </s.ProductInfoContainer>
             <s.ButtonContainer>
-                <s.AddButton>+ Adicionar</s.AddButton>
+              {product.inCart ? 
                 <s.ChangeQuantityContainer>
-                  <s.RemoveIncon src={removeIcon}/>
+                    <s.IconButton onClick={()=> removeFromCart(product)}><s.RemoveIncon src={removeIcon}/></s.IconButton>
                   <s.Quantity>
-                    <s.QuantityNumber>55</s.QuantityNumber>
+                    <s.QuantityNumber>{product.qty_purchased}</s.QuantityNumber>
                   </s.Quantity>
-                  <s.AddIncon src={addIcon}/>
+                    <s.IconButton onClick={()=> addToCart(product)}><s.AddIncon src={addIcon}/></s.IconButton>
                 </s.ChangeQuantityContainer>
+                :
+                <s.AddButton onClick={()=> addToCart(product)}>+ Adicionar</s.AddButton>
+              }
             </s.ButtonContainer>
           </s.CardContainer>
         );

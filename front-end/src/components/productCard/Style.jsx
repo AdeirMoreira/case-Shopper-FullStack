@@ -95,6 +95,11 @@ export const AddIncon = styled.img`
     width: 1.5em;
     height: 1.5em;
 `
+export const IconButton = styled.button`
+    border: none;
+    background-color: transparent;
+    padding: 0em;
+`
 export const Quantity = styled.div`
     grid-area: quantity;
     border-radius: 1em;
