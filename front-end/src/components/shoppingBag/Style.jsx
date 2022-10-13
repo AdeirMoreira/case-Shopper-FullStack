@@ -10,8 +10,11 @@ export const ShoppingBagContainer = styled.div`
     right: 0.3em;
     top: 4.5em;
     border-radius: 0.5em;
+    border-top: 0.2em solid RGB(140, 207, 182);
 `
-
+export const ProcuctGridContainer = styled.div`
+    overflow: auto;
+`
 export const ProductGrid = styled.div`
     display: grid;
     justify-content: center;
@@ -21,12 +24,12 @@ export const ProductGrid = styled.div`
     "photo name name name name delete" 2em
     "photo price remove quantity add ." 2em
     / 5em 9em 1.5em 3em 1.5em 3.4em;
-    border-top: 0.2em solid RGB(140, 207, 182);
+    border-bottom: 0.2em solid rgb(241,241,241);
+    padding: 1em 0em 1em 0em;
 `
 
 export const Photo = styled.div`
     grid-area: photo;
-    
 `
 export const Name = styled.div`
     grid-area: name;
@@ -96,7 +99,11 @@ export const ProductPrice = styled.span`
     font-size: 1em;
     font-weight: bold;
 `
-
+export const IconButton = styled.button`
+    border: none;
+    background-color: transparent;
+    padding: 0em;
+`
 export const RemoveIncon = styled.img`
     width: 1.5em;
     height: 1.5em;
