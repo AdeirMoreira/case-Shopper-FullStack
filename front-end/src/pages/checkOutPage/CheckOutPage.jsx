@@ -5,8 +5,14 @@ import sentIcon from '../../assets/images/sent.png'
 import shoppingCartIcon from '../../assets/images/shopping-Cart.png'
 import shopperTruck from '../../assets/images/shopperTruck.png'
 import shopperLogo from '../../assets/images/logo-shopper-01.png'
+import { useNavigate } from "react-router-dom"
+import { goBack, goToShippingPage } from "../../routes/Coordinators"
+import { useContext } from "react"
+import { Shopper } from "../../globalState/Context"
 
 const CheckOutPage = () => {
+    const navigate = useNavigate()
+    const { purchaseData, cart, name, handleName, deliveryDate, handleDate } = useContext(Shopper)
     return(
         <>
             <Header/>
@@ -36,16 +42,16 @@ const CheckOutPage = () => {
                 <s.UserDataInputContainer>
                     <s.UserNameInputContainer>
                         <s.UserNameLabel>Nome</s.UserNameLabel>
-                        <s.UserNameInput type={'text'} placeholder="Digite seu nome"/>
+                        <s.UserNameInput value={name} name={'name'} onChange={handleName} type={'text'} placeholder="Digite seu nome"/>
                     </s.UserNameInputContainer>
                     <s.DeliveryDatainputContainer>
                         <s.DeliveryDataLabel>Data de Entrega</s.DeliveryDataLabel>
-                        <s.DeliveryDataInput type={'date'}/>
+                        <s.DeliveryDataInput value={deliveryDate} onChange={handleDate} type={'date'}/>
                     </s.DeliveryDatainputContainer>
                 </s.UserDataInputContainer>
                 <s.NavigationbuttonsContainer>
-                    <s.NagationButton>Voltar às compras</s.NagationButton>
-                    <s.NagationButton>Finalizar compra</s.NagationButton>
+                    <s.NagationButton onClick={()=> goBack(navigate)}>Voltar às compras</s.NagationButton>
+                    <s.NagationButton onClick={()=> goToShippingPage(navigate)}>Finalizar compra</s.NagationButton>
                 </s.NavigationbuttonsContainer>
                 <s.BasketContainer>
                     <s.TruckBox>
@@ -53,7 +59,7 @@ const CheckOutPage = () => {
                     </s.TruckBox>
                     <s.BasketBox>
                         <s.BaskText>Total do Pedido</s.BaskText>
-                        <s.BaskPrice>R$ 300,00</s.BaskPrice>
+                        <s.BaskPrice>R$ {purchaseData.totalPurchasePrice.toFixed(2).replace('.', ',')}</s.BaskPrice>
                     </s.BasketBox>
                 </s.BasketContainer>
                 <s.ProducPurchasedTable>
@@ -71,24 +77,29 @@ const CheckOutPage = () => {
                         <s.BlueText>Valor Total</s.BlueText>
                     </s.TotalPrice>
                     </s.ProductPurchaseTitleTableGrid>
-                    <s.ProductPurchasedTableRowGrid>
-                    <s.Photo>
-                        <s.ShopperLogo src={shopperLogo}/>
-                    </s.Photo>
-                    <s.ProductName>
-                        <s.GrayText>Óleo do Peroba</s.GrayText>
-                    </s.ProductName>
-                    <s.ProductPrice>
-                        <s.BlueText>R$ 129,00</s.BlueText>
-                    </s.ProductPrice>
-                    <s.ProductQuantity>
-                        <s.GrayText>50</s.GrayText>
-                    </s.ProductQuantity>
-                    <s.ProductTotalPrice>
-                        <s.BlueText>R$ 500,00</s.BlueText>
-                    </s.ProductTotalPrice>
-                </s.ProductPurchasedTableRowGrid>
-                
+                    <>
+                        {cart.length > 0 && cart.map(product => {
+                            return (
+                                <s.ProductPurchasedTableRowGrid key={product.id}>
+                                <s.Photo>
+                                    <s.ShopperLogo src={shopperLogo}/>
+                                </s.Photo>
+                                <s.ProductName>
+                                    <s.GrayText>{product.name}</s.GrayText>
+                                </s.ProductName>
+                                <s.ProductPrice>
+                                    <s.BlueText>R$ {product.price.toFixed(2).replace('.', ',')}</s.BlueText>
+                                </s.ProductPrice>
+                                <s.ProductQuantity>
+                                    <s.GrayText>{product.qty_purchased}</s.GrayText>
+                                </s.ProductQuantity>
+                                <s.ProductTotalPrice>
+                                    <s.BlueText>R$ {product.totalPrice.toFixed(2).replace('.', ',')}</s.BlueText>
+                                </s.ProductTotalPrice>
+                                </s.ProductPurchasedTableRowGrid>
+                            )
+                        })}
+                    </>
                 </s.ProducPurchasedTable>
             </s.CheckOutContainer>
         </>

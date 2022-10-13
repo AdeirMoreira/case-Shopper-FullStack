@@ -6,7 +6,8 @@ export const CheckOutContainer = styled.div`
     justify-content: center;
     padding: 6em 0em 0em 0em;
     align-items: center;
-    gap: 4em;
+    gap: 2.5em;
+    padding-bottom: 3em;
     @media screen and (max-width: 800px) {
         padding-top: 9em;
     }
@@ -99,6 +100,7 @@ export const NavigationbuttonsContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 5em;
 ` 
 export const NagationButton = styled.button`
     background-color: white;
@@ -196,8 +198,8 @@ export const ProductPurchasedTableRowGrid = styled.div`
     display: grid;
     grid-template: 
     /* "product product price quantity totalPrice" 4em */
-    "photo productName productPrice productQuantity productTotalPrice" 4em
-    / 4em 15em 10em 10em 10em;
+    "photo productName productPrice productQuantity productTotalPrice" 6em
+    / 4em 20em 10em 10em 10em;
 
 `
 export const ProductName = styled.div`
@@ -230,13 +232,13 @@ export const ProductTotalPrice = styled.div`
 `
 export const GrayText = styled.span`
     color: rgb(122,122,123);
-    font-size: 1.4em;
+    font-size: 1.2em;
     text-align: center;
     margin: 0;
 `
 export const BlueText = styled.span`
     color: rgb(0,45,98);
-    font-size: 1.4em;
+    font-size: 1.2em;
     text-align: center;
     margin: 0;
 `
