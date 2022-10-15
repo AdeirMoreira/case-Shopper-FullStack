@@ -12,14 +12,15 @@ export class StockController {
 
   public GetAll = async (req: Request, res: Response) => {
     try {
-      await this.appDataSource.initialize();
+      !this.appDataSource.isInitialized && await this.appDataSource.initialize();
       const response = await this.stockBusiness.getAll();
       res.status(200).send(response);
     } catch (error) {
       res.status(error.statusCode || 400).send({ message: error.message });
-    } finally {
-      this.appDataSource.destroy();
-    }
+    } 
+    // finally {
+    //   this.appDataSource.destroy();
+    // }
   };
 
   public Update = async (req: Request, res: Response) => {
@@ -27,14 +28,15 @@ export class StockController {
       req.body.productsPurchased
     );
     try {
-      await this.appDataSource.initialize();
+      !this.appDataSource.isInitialized && await this.appDataSource.initialize();
       const response = await this.stockBusiness.update(productsPurchasedDto);
       res.status(200).send(response);
     } catch (error) {
       res.status(error.statusCode || 400).send({ message: error.message });
-    } finally {
-      this.appDataSource.destroy();
-    }
+    } 
+    // finally {
+    //   this.appDataSource.destroy();
+    // }
   };
 }
 

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { goToCheckOutPage } from '../../routes/Coordinators'
 
 const ShoppingBag = () => {
-    const { cart, addToCart, removeFromCart, removeFromCartDirectly } = useContext(Shopper);
+    const { cart, removeFromCart, removeFromCartDirectly, checkQuantityPurchased, checkCartIsEmpety } = useContext(Shopper);
     const navigate = useNavigate()
 
     return(
@@ -25,7 +25,9 @@ const ShoppingBag = () => {
                                 <s.ProductName>{product.name}</s.ProductName>
                             </s.Name>
                             <s.Delele>
-                                <s.IconButton onClick={()=> removeFromCartDirectly(product)}><s.TrashIncon src={trashIcon}/></s.IconButton>
+                                <s.IconButton onClick={()=> removeFromCartDirectly(product)}>
+                                    <s.TrashIncon src={trashIcon}/>
+                                </s.IconButton>
                             </s.Delele>
                             <s.Price>
                                 <s.ProductPrice>R$ {product.price}</s.ProductPrice>
@@ -39,7 +41,7 @@ const ShoppingBag = () => {
                                 <s.QuantityNumber>{product.qty_purchased}</s.QuantityNumber>
                             </s.Quantity>
                             <s.Add>
-                                <s.IconButton onClick={()=> addToCart(product)}>
+                                <s.IconButton onClick={()=> checkQuantityPurchased(product)}>
                                     <s.AddIncon src={addIcon}/>
                                 </s.IconButton>
                             </s.Add>
@@ -48,8 +50,7 @@ const ShoppingBag = () => {
             })
             }
             </s.ProcuctGridContainer>
-            
-            <s.FinishButton onClick={()=> goToCheckOutPage(navigate)}>FINALIZAR</s.FinishButton>
+            <s.FinishButton onClick={()=> checkCartIsEmpety(navigate)}>FINALIZAR</s.FinishButton>
         </s.ShoppingBagContainer>
     )
 }

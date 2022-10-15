@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useInput } from "../hooks/useInput"
+import { goToCheckOutPage, goToMainPage, goToShippingPage } from "../routes/Coordinators"
 import { GetAllProducts } from "../service/cartPage"
+import { RegisterPurchaseRequest, UpdateStockRequest } from "../service/shippingPage"
 import { Shopper } from "./Context"
 
 export const GlobalState = (props) => {
@@ -8,11 +10,13 @@ export const GlobalState = (props) => {
     const [cart, setCart] = useState([])
     const [purchaseData , setPurchaseData] = useState({ totalPurchasePrice:0, totalPurchaseItens:0 })
     const [displayShoppingBag, setDisplayShoppingBag] = useState(false)
+    const [displayPopUp, setDisplayPopUp] = useState(false)
+    const [popUpMessage, setPopUpMessage] = useState([])
     const [name, handleName, clearInputName] = useInput('')
     const [deliveryDate, handleDate, clearInputDate] = useInput('')
     const [search, handleSearh, clearInputSearch] = useInput('')
     const [searchTerm, setSearchTerm] = useState('')
-    
+
     const GetAllProductsInStock = () => {
         GetAllProducts(addProductPurchaseProperties)
     }
@@ -25,6 +29,20 @@ export const GlobalState = (props) => {
             return product
         })
         setProducts(products)
+    }
+
+    const checkQuantityPurchased = (product) => {
+        (product.qty_purchased + 1) > product.qty_stock ? buildPopUpMessage(
+            'Limite de estoque.',
+            `A Quantidade desse produto que você deseja comprar excede a quantidade disponivel em estoque.`
+        ) 
+        : addToCart(product) 
+    }
+
+    const buildPopUpMessage = (title,message) => {
+        const popUpContent = [title,message]
+        setPopUpMessage(popUpContent)
+        setDisplayPopUp(true)
     }
 
     const addToCart = (product) => {
@@ -86,17 +104,67 @@ export const GlobalState = (props) => {
     
     const openCloseShoppingBag = () => setDisplayShoppingBag(displayShoppingBag ? false : true)
 
-    const searchProduct = (term) => setSearchTerm(term)
-    
+    const searchProduct = (term,navigate) => {
+        goToMainPage(navigate)
+        setSearchTerm(term)
+    }
     const clearSearchTerm = () => {
         setSearchTerm('')
         clearInputSearch()
     }
+    
+    const checkCartIsEmpety = (navigate) => {
+        cart.length > 0 ? goToCheckOutPage(navigate) :
+        buildPopUpMessage('Carrinho Vazio.','Adicione um item ao carrinho.')
+    }
+    
+    const checkNameAndDeliveryDate = (navigate) => {
+        name && deliveryDate && checkDeliveryDataHasPassed(deliveryDate) ? goToShippingPage(navigate) : buildPopUpMessage(
+            'Nome e/ou Data de Entrega Inválidos',
+            'Por favor digite seu nome e uma data de entrega para seu pedido. A data de entrega deve ser uma da futura.'
+        )    
+    }
+
+    const checkDeliveryDataHasPassed = (deliveryData) => new Date(deliveryData) >  Date.now() 
+    
+    const finalizePurchase = () => {
+        registerPurchase()
+        updateStock()
+        setCart([])
+        setPurchaseData({ totalPurchasePrice:0, totalPurchaseItens:0 })
+        clearInputName()
+        clearInputDate()
+    }
+
+    const registerPurchase = () => {
+        const purchase = {
+            clientName: name,
+            totalPrice: purchaseData.totalPurchasePrice,
+            productsPurchased: cart,
+            deliveryDate
+        }
+        RegisterPurchaseRequest(purchase)
+    }
+
+    const updateStock = () => {
+        const productsPurchased = {
+            productsPurchased : cart.map(product => {
+                    return {
+                        id:product.id, 
+                        qty_purchased: product.qty_purchased
+                    }
+                }
+            )
+        }
+        UpdateStockRequest(productsPurchased)
+    }
+
     const params = {
         products,
         cart,
         GetAllProductsInStock,
         addToCart,
+        checkQuantityPurchased,
         removeFromCart,
         removeFromCartDirectly,
         purchaseData,
@@ -104,7 +172,11 @@ export const GlobalState = (props) => {
         openCloseShoppingBag,
         name, handleName, clearInputName,
         deliveryDate, handleDate, clearInputDate,
-        search, handleSearh, clearInputSearch, searchTerm, searchProduct, clearSearchTerm
+        search, handleSearh, clearInputSearch, searchTerm, searchProduct, clearSearchTerm,
+        displayPopUp, setDisplayPopUp, popUpMessage,
+        checkCartIsEmpety,
+        checkNameAndDeliveryDate,
+        finalizePurchase
     }
 
     return (

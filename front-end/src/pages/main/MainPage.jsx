@@ -1,24 +1,24 @@
 import { useContext, useEffect } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
 import { Shopper } from "../../globalState/Context";
-import { GetAllProducts } from "../../service/cartPage";
 import * as s from "./style";
 import Cart from "../../components/cart/Cart";
 import Header from "../../components/header/Header";
 import PopUp from "../../components/popUp/PopUp";
 import ShoppingBag from "../../components/shoppingBag/ShoppingBag";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
-  const { GetAllProductsInStock, products, displayShoppingBag } = useContext(Shopper);
-
+  const { GetAllProductsInStock, products, displayShoppingBag, displayPopUp } = useContext(Shopper);
+  const navigate = useNavigate()
   useEffect(() => { GetAllProductsInStock();}, []);
 
   return (
     <s.ScreenContainer>
-      <Header/>
+      <Header navigate={navigate}/>
       <Cart/>
       {displayShoppingBag && <ShoppingBag/>}
-      {/* <PopUp/> */}
+      {displayPopUp && <PopUp/>}
       <s.MainContainer>
         {products.length > 0 && <ProductCard/>}
       </s.MainContainer>

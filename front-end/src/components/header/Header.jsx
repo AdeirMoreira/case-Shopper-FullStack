@@ -5,7 +5,7 @@ import XButtonIcon from '../../assets/images/X-Button.png'
 import { useContext } from "react";
 import { Shopper } from "../../globalState/Context";
 
-export const Header = () => {
+export const Header = ({navigate}) => {
   const {search, handleSearh, searchProduct, clearSearchTerm} = useContext(Shopper)
   return (
     <s.HeaderContainer>
@@ -17,7 +17,6 @@ export const Header = () => {
         <s.Subtitle>compra programada</s.Subtitle>
       </s.TitleContainer>
       <s.SearchContainer>
-        
           <s.InputSearchProduct
           name="productSearch"
           placeholder="O que você procura?"
@@ -27,7 +26,7 @@ export const Header = () => {
           />
           <s.InputContainer>
           {search && <s.Xbutton onClick={() => clearSearchTerm()}><s.XIcon src={XButtonIcon}/></s.Xbutton>}
-        <s.InputSearchButton onClick={() => searchProduct(search)}>
+        <s.InputSearchButton onClick={() => searchProduct(search,navigate)}>
           <s.MagnifyingGlassIcon
             src={magnifyingGlassIcon}
           ></s.MagnifyingGlassIcon>

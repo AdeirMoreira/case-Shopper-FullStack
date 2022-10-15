@@ -1,25 +1,22 @@
+import { useContext } from 'react'
+import { Shopper } from '../../globalState/Context'
 import * as s from './Style'
 
 const PopUp = () => {
-    const displayPopUp = false
+    const { setDisplayPopUp, popUpMessage } = useContext(Shopper)
+
     return(
-        <>
-            {
-                displayPopUp && 
-                    <s.PopUpContainer>
-                        <s.PopUpMessage>
-                            <s.StockLimitText>
-                                Limite de estoque.
-                            </s.StockLimitText>
-                            <s.StockLimitDescription>
-                                A Quantidade do produto X que você deseja comprar excede a 
-                                quantidade disponivel em estoque.
-                            </s.StockLimitDescription>
-                            <s.CloseButton>ENTENDI</s.CloseButton>
-                        </s.PopUpMessage>
-                    </s.PopUpContainer>
-            }
-        </>
+            <s.PopUpContainer>
+                <s.PopUpMessage>
+                    <s.StockLimitText>
+                        {popUpMessage[0]}
+                    </s.StockLimitText>
+                    <s.StockLimitDescription>
+                        {popUpMessage[1]}
+                    </s.StockLimitDescription>
+                    <s.CloseButton onClick={()=> setDisplayPopUp(false)}>ENTENDI</s.CloseButton>
+                </s.PopUpMessage>
+            </s.PopUpContainer>
     )
     
 }

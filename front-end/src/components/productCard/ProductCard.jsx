@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { Shopper } from "../../globalState/Context";
 
 const ProductCard = () => {
-  const { addToCart, removeFromCart, products, searchTerm } = useContext(Shopper);
+  const { removeFromCart, products, searchTerm, checkQuantityPurchased } = useContext(Shopper);
   
   return (
     <>
@@ -33,10 +33,10 @@ const ProductCard = () => {
                   <s.Quantity>
                     <s.QuantityNumber>{product.qty_purchased}</s.QuantityNumber>
                   </s.Quantity>
-                    <s.IconButton onClick={()=> addToCart(product)}><s.AddIncon src={addIcon}/></s.IconButton>
+                    <s.IconButton onClick={()=> checkQuantityPurchased(product)}><s.AddIncon src={addIcon}/></s.IconButton>
                 </s.ChangeQuantityContainer>
                 :
-                <s.AddButton onClick={()=> addToCart(product)}>+ Adicionar</s.AddButton>
+                <s.AddButton onClick={()=> checkQuantityPurchased(product)}>+ Adicionar</s.AddButton>
               }
             </s.ButtonContainer>
           </s.CardContainer>

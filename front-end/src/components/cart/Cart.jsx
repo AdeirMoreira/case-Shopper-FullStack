@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { goToCheckOutPage } from '../../routes/Coordinators'
 
 export const Cart = () => {
-    const { purchaseData, displayShoppingBag, openCloseShoppingBag } = useContext(Shopper)
+    const { purchaseData, displayShoppingBag, openCloseShoppingBag, checkCartIsEmpety } = useContext(Shopper)
     const navigate = useNavigate()
 
     return (
@@ -32,7 +32,7 @@ export const Cart = () => {
                 </s.TotalPriceContainer>
             </s.OpenCartCotaier>
             {!displayShoppingBag && 
-                <s.FinalizePurchaseContainer onClick={()=> goToCheckOutPage(navigate)}>
+                <s.FinalizePurchaseContainer onClick={()=> checkCartIsEmpety(navigate)}>
                     <s.FinalizePurchaseText>
                         FINALIZAR A COMPRA
                 </s.FinalizePurchaseText>
