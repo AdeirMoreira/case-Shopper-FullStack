@@ -1,5 +1,5 @@
 import { validateOrReject } from "class-validator";
-import { CustonError } from "../../Model/CustomError/CustomError";
+import { CustonError } from "../../model/customError/CustomError";
 import stockDataBase, { StockDataBase } from "../data/stockDataBase";
 import { ProductsPurchased } from "../dto/ProductsPurchased";
 import { ProductsPurchasedDto } from "../dto/ProductsPurchasedDto";
@@ -20,7 +20,10 @@ export class StockBusiness {
     try {
       const product = await this.stockDataBase.getById(id);
       if (!product) {
-        throw new CustonError(404, `Produto de ${id} não foi encontrado no banco de dados`);
+        throw new CustonError(
+          404,
+          `Produto de ${id} não foi encontrado no banco de dados`
+        );
       }
       return product;
     } catch (error) {
@@ -45,10 +48,12 @@ export class StockBusiness {
         const newProductQty =
           productsPurchasedDB[index].qty_stock -
           productsDto[index].qty_purchased;
-        if(newProductQty < 0) {
-          throw new CustonError(422,
+        if (newProductQty < 0) {
+          throw new CustonError(
+            422,
             `A quantidade comprada do produto de id ${productsPurchasedDB[index].id}` +
-            ' é maior que do que a quantidade em estoque.')
+              " é maior que do que a quantidade em estoque."
+          );
         }
         const productUpdated = new Stock(
           productsPurchasedDB[index].id,

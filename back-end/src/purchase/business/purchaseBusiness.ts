@@ -1,6 +1,6 @@
 import { validateOrReject } from "class-validator";
-import { CustonError } from "../../Model/CustomError/CustomError";
-import idGenerator, { IdGenerator } from "../../Services/IDGenerator";
+import { CustonError } from "../../model/customError/CustomError";
+import idGenerator, { IdGenerator } from "../../services/IDGenerator";
 import stockBusiness, {
   StockBusiness,
 } from "../../stock/business/stockBusiness";

@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 import { AppDataSource } from "../../data-source/data-source";
-import { CustonError } from "../../Model/CustomError/CustomError";
+import { CustonError } from "../../model/customError/CustomError";
 import { Purchase } from "../entity/Purchase";
 
 export class PurchaseDataBase {

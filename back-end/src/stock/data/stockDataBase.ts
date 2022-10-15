@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 import { AppDataSource } from "../../data-source/data-source";
-import { CustonError } from "../../Model/CustomError/CustomError";
+import { CustonError } from "../../model/customError/CustomError";
 import { Stock } from "../entity/Stock";
 
 export class StockDataBase {
@@ -32,7 +32,7 @@ export class StockDataBase {
     }
   }
 
-  public async update(product:Stock) {
+  public async update(product: Stock) {
     try {
       const stockRepository = this.appDataSource.getRepository(Stock);
       const result = await stockRepository.save(product);
