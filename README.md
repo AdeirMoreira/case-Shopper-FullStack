@@ -63,7 +63,7 @@ A API Node, por sua vez, rodará na porta 3003 e seu endereço base é http://lo
 
 ### Testes no Back-End 🧪
 
-Para rodar os testes de integração na API, que similam uma requisição real, é preciso subir um container com um banco de dados de teste.
+Para rodar os testes de integração na API, que similam uma requisição real, é preciso iniciar um container com um banco de dados de teste.
 ```
 docker compose --profile test up
 ```
