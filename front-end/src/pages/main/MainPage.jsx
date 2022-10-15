@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 const MainPage = () => {
   const { GetAllProductsInStock, products, displayShoppingBag, displayPopUp } = useContext(Shopper);
   const navigate = useNavigate()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { GetAllProductsInStock();}, []);
 
   return (

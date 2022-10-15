@@ -5,7 +5,6 @@ import sentIcon from '../../assets/images/sent.png'
 import sentIconGreen from '../../assets/images/sentIconGreen.png'
 
 const ProgresComponent = ({page}) => {
-    console.log(page)
     return (
         <s.ProgresContainer>
             <s.ProgressBarContainer>
