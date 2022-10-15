@@ -9,6 +9,14 @@
 
 Um projeto Full-Stack desenvolvido para o processo seletivo da Shopper. No Front-End, foi desenvolvido um site de E-comercie em React baseado do site oficial da Shopper, no qual é apresentada uma lista de produtos que podem ser adicionados ao carrinho. Ao finalizar o pedido, os dados da compra são enviados ao Back-End. No Back-End, foi desenvolvida uma API em NodeJS que verifica os dados e os armazena em um banco de dados MySQL. O Docker foi usado para rodar o Front, Back e o Banco de dados em contêineres.
 
+## Imagens do Site
+
+<p  align="center">
+    <img src="https://user-images.githubusercontent.com/98994187/196003883-6ee60f93-51b5-419a-bb72-aa0d1d1722d3.png" width="500" height="400">
+    <img src="https://user-images.githubusercontent.com/98994187/196003884-a0f59111-4c16-4abb-81c0-c0e1a7377fe6.png" width="500" height="400">
+    <img src="https://user-images.githubusercontent.com/98994187/196003882-60e39024-6d02-451b-bb0e-f0b5a6976150.png" width="800" height="400">
+<p/>
+
 ## Tecnologias 🛠
 
 - [React](https://pt-br.reactjs.org/)
@@ -38,7 +46,7 @@ Um projeto Full-Stack desenvolvido para o processo seletivo da Shopper. No Front
 
 - [Docker](https://www.docker.com/) 
 
-Para rodar o projeto o único pre-requsitos é ter o [Docker](https://www.docker.com/) instalado em sua máquina, pois todos os outros recursos necessários são instalados automaticamente nos contêiners quando eles são inciados.
+Para rodar o projeto, o único pre-requsito é ter o [Docker](https://www.docker.com/) instalado em sua máquina, pois todos os outros recursos necessários são instalados automaticamente nos contêiners quando eles são inciados.
 <!-- <h2 id="tecnologia">Tecnologias<h2/> -->
 
 #### 1️⃣ Clonar e abrir
@@ -51,7 +59,7 @@ cd case-Shopper-FullStack/back-end
 ```
 docker compose up
 ```
-Após cerca de 1 minuto os contêineres do App React, da API Node, e do Banco de dados MySQL estarão inicializados.
+Após cerca de 1 minuto e meio os contêineres do App React, da API Node, e do Banco de dados MySQL estarão inicializados.
 
 #### 🟢 [App-React](http://localhost:3000/)
 
