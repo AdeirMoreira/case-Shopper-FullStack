@@ -51,7 +51,7 @@ cd case-Shopper-FullStack/back-end
 ```
 docker compose up
 ```
-Após cerca de 1 minuto os contêineres do App React, da API Node, e do Banco de dados MySQL estarão inicializados.
+Após cerca de 1 minuto e meio ou quando aparecer a mensagem ```node-Shopper   | Server is running in http://localhost:3003``` no terminal, os contêineres do App React, da API Node, e do Banco de dados MySQL estarão inicializados.
 
 #### 🟢 [App-React](http://localhost:3000/)
 
@@ -64,10 +64,12 @@ A API Node, por sua vez, rodará na porta 3003 e seu endereço base é http://lo
 ### Testes no Back-End 🧪
 
 Para rodar os testes de integração na API, que similam uma requisição real, é preciso iniciar um container com um banco de dados de teste.
+
+Abra um novo terminal para iniciar o container do banco de dados teste.
 ```
 docker compose --profile test up
 ```
-Após o banco de dados de teste estiver inicializado 
+Após o banco de dados de teste estiver inicializado, abra um novo terminal
 ```
 npm run test
 ```

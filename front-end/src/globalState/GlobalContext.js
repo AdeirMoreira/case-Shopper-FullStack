@@ -125,7 +125,9 @@ export const GlobalState = (props) => {
         )    
     }
 
-    const checkDeliveryDataHasPassed = (deliveryData) => new Date(deliveryData) >  Date.now() 
+    const checkDeliveryDataHasPassed = (deliveryData) => {
+        return new Date(deliveryData).getTime() >= new Date(new Date().toISOString().slice(0, 10)).getTime()
+    } 
     
     const finalizePurchase = () => {
         registerPurchase()

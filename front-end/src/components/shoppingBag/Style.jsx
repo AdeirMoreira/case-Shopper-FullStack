@@ -14,6 +14,7 @@ export const ShoppingBagContainer = styled.div`
 `
 export const ProcuctGridContainer = styled.div`
     overflow: auto;
+    padding-bottom: 1.3em;
 `
 export const ProductGrid = styled.div`
     display: grid;
@@ -21,7 +22,7 @@ export const ProductGrid = styled.div`
     align-items: center;
     gap: 0.3em;
     grid-template: 
-    "photo name name name name delete" 2em
+    "photo name name name name delete" 3em
     "photo price remove quantity add ." 2em
     / 5em 9em 1.5em 3em 1.5em 3.4em;
     border-bottom: 0.2em solid rgb(241,241,241);
