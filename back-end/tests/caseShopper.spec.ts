@@ -2,8 +2,10 @@
  * @jest-environment ./src/data-source/custom-environment.js
  */
 
+import express from "express";
 import request from "supertest";
-import app from "../src";
+import { PurchaseRouter } from "../src/router/purchaseRouter";
+import { StockRouter } from "../src/router/stokRouter";
 
 describe("Teste ponta a ponta da API", () => {
   const registerPurchaseRouter = "/Purchase/register";
@@ -14,7 +16,15 @@ describe("Teste ponta a ponta da API", () => {
   let productInStock = null;
   let productPurchased = null;
   let purchase = null;
+  
+  const app = express()
+  app.use(express.json())
+  app.use("/purchase", PurchaseRouter);
+  app.use("/stock", StockRouter);
+
   beforeAll(async () => {
+    
+
     allProductsInStock = await request(app).get(getAllStockRouter);
     productInStock = { ...allProductsInStock.body[0] };
     productPurchased = { id: productInStock.id, qty_purchased: 100 };
