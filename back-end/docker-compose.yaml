@@ -19,8 +19,8 @@ services:
     tty: true
     ports:
       - 3306:3306
-    # volumes:
-    #   - .docker/dbdata:/var/lib/mysql
+    volumes:
+      - .docker/dbdata:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_ROOT_PASSWORD=${DB_PASS}
@@ -29,8 +29,6 @@ services:
 
   react-app:
     build: ../front-end
-    # profiles:
-    #   - react
     command: wait-for db:3306 -t 120 -- .docker/entrypoint.sh
     container_name: react-Shopper
     ports:

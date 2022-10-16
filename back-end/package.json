@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "clear && ts-node-dev ./src/index.ts",
     "start": "node ./build/src/index.js",
-    "test": "jest",
+    "pretest": "docker compose up dbtest -d",
+    "test": "sleep 25 && jest",
+    "posttest": "docker compose stop dbtest && docker compose rm -f dbtest",
     "populate": "npx ts-node-dev ./src/stock/script/populateStockTableScript.ts",
     "unpopulate": "npx ts-node-dev ./src/stock/script/unpopulateStockDataBase.ts",
     "migration:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/data-source/data-source.ts",
