@@ -9,7 +9,7 @@
 
 Um projeto Full-Stack desenvolvido para o processo seletivo da Shopper. No Front-End, foi desenvolvido um site de E-comercie em React baseado do site oficial da Shopper, no qual é apresentada uma lista de produtos que podem ser adicionados ao carrinho. Ao finalizar o pedido, os dados da compra são enviados ao Back-End. No Back-End, foi desenvolvida uma API em NodeJS que verifica os dados e os armazena em um banco de dados MySQL. O Docker foi usado para rodar o Front, Back e o Banco de dados em contêineres.
 
-## Imagens do Site
+## Screenshots do site 📸
 
 <p  align="center">
     <img src="https://user-images.githubusercontent.com/98994187/196003883-6ee60f93-51b5-419a-bb72-aa0d1d1722d3.png" width="500" height="400">
@@ -21,6 +21,7 @@ Um projeto Full-Stack desenvolvido para o processo seletivo da Shopper. No Front
 
 - [React](https://pt-br.reactjs.org/)
 - [Axios](https://www.npmjs.com/package/axios)
+- [Styled-Components](https://styled-components.com/)
 - [Node](https://nodejs.org/en/)
 - [Express](https://expressjs.com/pt-br/)
 - [typeORM](https://typeorm.io/)
@@ -28,7 +29,7 @@ Um projeto Full-Stack desenvolvido para o processo seletivo da Shopper. No Front
 - [MySQL](https://www.mysql.com/)
 - [Docker](https://www.docker.com/)
 
-## Requisito atendidos ✔
+## Requisitos atendidos ✔
 
 - ✅ O sistema deve ter um formulário de cadastro de pedidos
 - ✅ O usuário deve entrar com Nome do Cliente, Data de Entrega e uma lista de compras
@@ -71,17 +72,17 @@ A API Node, por sua vez, rodará na porta 3003 e seu endereço base é http://lo
 
 ### Testes no Back-End 🧪
 
-Para rodar os testes de integração na API, que similam uma requisição real, é preciso iniciar um container com um banco de dados de teste.
+Para rodar os testes de integração na API, é preciso iniciar um container um banco de dados de teste.
 
-Abra um novo terminal para iniciar o container do banco de dados teste.
-```
-docker compose --profile test up
-```
-Após o banco de dados de teste estiver inicializado, abra um novo terminal
+❗⚠ Abra um novo terminal e navegue até ```case-Shopper-FullStack/back-end```
+
+❗⚠ Um novo contêiner com um banco de dados de testes será preparado, por isso, os testes aguardarão 25 segundos até que esse 
+contêiner esteja pornto.
+
+1️⃣ Rodar os testes
 ```
 npm run test
 ```
-
 
 ## 👨‍💻 Desenvolvedor
 <table>         
