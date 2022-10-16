@@ -45,9 +45,10 @@ Um projeto Full-Stack desenvolvido para o processo seletivo da Shopper. No Front
 
 ### Pre-Requisitos ❗⚠
 
-- [Docker](https://www.docker.com/) 
+- [Docker](https://www.docker.com/) OBRIGATÓRIO
+- [Node](https://nodejs.org/en/) - OPCIONAL
 
-Para rodar o projeto, o único pre-requsito é ter o [Docker](https://www.docker.com/) instalado em sua máquina, pois todos os outros recursos necessários são instalados automaticamente nos contêiners quando eles são inciados.
+Para rodar o projeto, é preciso ter apenas [Docker](https://www.docker.com/) e o node (caso queira rodar os testes) instalados em sua máquina, pois todos os outros recursos necessários são instalados automaticamente nos contêiners quando eles são inciados.
 <!-- <h2 id="tecnologia">Tecnologias<h2/> -->
 
 #### 1️⃣ Clonar e abrir
