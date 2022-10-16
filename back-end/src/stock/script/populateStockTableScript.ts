@@ -14,7 +14,9 @@ export const PopulateDatabase = () => {
       try {
         await AppDataSource.initialize();
         const repository = AppDataSource.getRepository(Stock);
-        const promisesArray = products.map((product) => {
+        const AllProducts = await repository.find()
+        if(AllProducts.length === 0) {
+          const promisesArray = products.map((product) => {
           const id = IDGenerator.generateId();
           const newproduct = new Stock(
             id,
@@ -22,10 +24,11 @@ export const PopulateDatabase = () => {
             product.price,
             product.qty_stock
           );
-          return repository.save(newproduct);
-        });
-        const resultDb = await Promise.all(promisesArray);
-        console.log(resultDb);
+            return repository.save(newproduct);
+          });
+          const resultDb = await Promise.all(promisesArray);
+          console.log(resultDb);
+        }
       } catch (error) {
         console.log(error);
       } finally {

@@ -30,9 +30,9 @@ export class PurchaseController {
     } catch (error) {
       res.status(error.statusCode || 400).send({ message: error.message });
     } 
-    // finally {
-    //   this.appDataSource.destroy();
-    // }
+    finally {
+      this.appDataSource.isInitialized && await this.appDataSource.destroy();
+    }
   };
 }
 export default new PurchaseController(purchaseBusiness, AppDataSource);
