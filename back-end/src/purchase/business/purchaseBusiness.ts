@@ -79,8 +79,7 @@ export class PurchaseBusiness {
     productsPurchased.forEach((product, index) => {
       const indexDB = productsDB.findIndex((p) => p.id === product.id);
       if (
-        productsDB[indexDB].qty_stock - productsPurchased[index].qty_purchased <
-        0
+        (productsDB[indexDB].qty_stock - productsPurchased[index].qty_purchased) < 0
       ) {
         throw new CustonError(
           422,

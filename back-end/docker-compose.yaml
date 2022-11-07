@@ -1,16 +1,16 @@
 version: '3.8'
 
 services:
-  api:
-    build: .
-    command: wait-for db:3306 -t 120 -- .docker/entrypoint.sh
-    container_name: node-Shopper
-    ports:
-      - 3003:3003
-    volumes:
-      - .:/home/node/app
-    depends_on:
-      - db
+  # api:
+  #   build: .
+  #   command: wait-for db:3306 -t 120 -- .docker/entrypoint.sh
+  #   container_name: node-Shopper
+  #   ports:
+  #     - 3003:3003
+  #   volumes:
+  #     - .:/home/node/app
+  #   depends_on:
+  #     - db
   
   db:
     image: mysql
@@ -27,30 +27,30 @@ services:
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASS}
 
-  react-app:
-    build: ../front-end
-    command: wait-for db:3306 -t 120 -- .docker/entrypoint.sh
-    container_name: react-Shopper
-    ports:
-      - 3000:3000
-    volumes:
-      - ../front-end:/home/node/app
-    depends_on:
-      - api
+  # react-app:
+  #   build: ../front-end
+  #   command: wait-for db:3306 -t 120 -- .docker/entrypoint.sh
+  #   container_name: react-Shopper
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ../front-end:/home/node/app
+  #   depends_on:
+  #     - api
   
-  dbtest:
-    image: mysql
-    profiles:
-      - test
-    container_name: mysqlTest-shopper
-    restart: always
-    tty: true
-    ports:
-      - 3307:3306
-    # volumes:
-    #   - .docker/dbdata:/var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=${DB_NAME}
-      - MYSQL_ROOT_PASSWORD=${DB_PASS}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASS}
+  # dbtest:
+  #   image: mysql
+  #   profiles:
+  #     - test
+  #   container_name: mysqlTest-shopper
+  #   restart: always
+  #   tty: true
+  #   ports:
+  #     - 3307:3306
+  #   # volumes:
+  #   #   - .docker/dbdata:/var/lib/mysql
+  #   environment:
+  #     - MYSQL_DATABASE=${DB_NAME}
+  #     - MYSQL_ROOT_PASSWORD=${DB_PASS}
+  #     - MYSQL_USER=${DB_USER}
+  #     - MYSQL_PASSWORD=${DB_PASS}
